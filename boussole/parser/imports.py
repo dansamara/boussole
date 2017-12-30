@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 .. _Sass Reference:
-    http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import
+    http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_import__import
 
-Parser
-======
+Imports
+=======
 
-Parser is in charge to find every ``@import`` rules in given Sass content.
+This parser is in charge to find every ``@import`` rules in given Sass content.
 
 It has been builded following `Sass Reference`_ about ``@import`` rule.
 """
@@ -17,29 +17,18 @@ import re
 from six.moves import filter
 
 from boussole.exceptions import InvalidImportRule
+from boussole.parser.comments import ScssCommentsParser
 
 
-class ScssImportsParser(object):
+class ScssImportsParser(ScssCommentsParser):
     """
     SCSS parser to find import rules.
 
-    This does not support the old Sass syntax (also known as "indented
-    syntax").
-
-    It's a mixin, meaning without own ``__init__`` method so it's should be
-    safe enough to inherit it from another class.
-
     Attributes:
         REGEX_IMPORT_RULE: Compiled regex used to find import rules.
-        REGEX_COMMENTS: Compiled regex used to find and remove comments.
     """
     REGEX_IMPORT_RULE = re.compile(r'@import\s*(url)?\s*\(?([^;]+?)\)?;',
                                    re.IGNORECASE)
-    # Second part (for singleline comment) contain a negative lookbehind
-    # assertion to avoid to match on url protocole (http://) and cause issues
-    # in parsing
-    REGEX_COMMENTS = re.compile(r'(/\*.*?\*/)|((?<!(:))//.*?(\n|$))',
-                                re.IGNORECASE | re.DOTALL)
 
     def strip_quotes(self, content):
         """
@@ -69,18 +58,6 @@ class ScssImportsParser(object):
             raise InvalidImportRule(error_msg.format(content))
 
         return content
-
-    def remove_comments(self, content):
-        """
-        Remove all comment kind (inline and multiline) from given content.
-
-        Args:
-            content (str): A SCSS source.
-
-        Returns:
-            string: Given SCSS source with all comments removed.
-        """
-        return self.REGEX_COMMENTS.sub("", content)
 
     def filter_rules(self, path):
         """

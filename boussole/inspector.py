@@ -13,7 +13,7 @@ import io
 from collections import defaultdict
 
 from boussole.exceptions import CircularImport
-from boussole.parser import ScssImportsParser
+from boussole.parser.imports import ScssImportsParser
 from boussole.resolver import ImportPathsResolver
 
 

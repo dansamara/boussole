@@ -6,7 +6,7 @@ import pytest
 
 import boussole
 
-from boussole.parser import ScssImportsParser
+from boussole.parser.imports import ScssImportsParser
 from boussole.finder import ScssFinder
 from boussole.resolver import ImportPathsResolver
 from boussole.inspector import ScssInspector
@@ -35,6 +35,10 @@ class FixturesSettingsTestMixin(object):
         # Sample project
         self.sample_dir = "sample_project"
         self.sample_path = os.path.join(self.fixtures_path, self.sample_dir)
+
+        # Variable samples
+        self.variables_dir = "variables"
+        self.variables_path = os.path.join(self.fixtures_path, self.variables_dir)
 
         # Some sample libraries
         self.lib1_dir = 'library_1'
