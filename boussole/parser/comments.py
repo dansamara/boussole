@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Comments
-========
+Comments parser
+===============
 
 This parser is in charge to find every comments in given Sass content.
 """

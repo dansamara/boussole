@@ -23,7 +23,7 @@ def test_nonvariable_blocks(source):
 
 @pytest.mark.xfail
 @pytest.mark.parametrize("source", [
-    """// $foo: bar;""",
+    """// $foo: bar;""", # Regex cannot ignore commented variable
 ])
 def test_parser_flaws(source):
     """Some flaw that should be fixed, at least keeped as reference"""

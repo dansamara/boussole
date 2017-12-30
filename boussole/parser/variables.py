@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Variables
-=========
+Variables parser
+================
 
 This parser is in charge to find every variables rules in given Sass content.
 """
@@ -9,10 +9,16 @@ from __future__ import unicode_literals
 
 import re
 
+from boussole.parser.comments import ScssCommentsParser
 
-class ScssVariablesParser(object):
+
+class ScssVariablesParser(ScssCommentsParser):
     """
     SCSS parser to find variables rules.
+
+    Attributes:
+        REGEX_VARIABLE_BLOCK: Compiled regex used to match variables blocks.
+        Every match contain ``selector`` and ``properties`` groups.
     """
     REGEX_VARIABLE_BLOCK = re.compile(r"(?P<selector>\$[\w\-]+)\s*:\s*(?P<properties>[^;]*?)\s*\;")
 
@@ -31,7 +37,7 @@ class ScssVariablesParser(object):
 
     def parse(self, content):
         """
-        Parse a stylesheet document with a regex
+        Parse a stylesheet document for every variables
 
         Args:
             content (str): A SCSS source.
@@ -39,4 +45,6 @@ class ScssVariablesParser(object):
         Returns:
             list: Finded variables
         """
-        return self.find_variable_blocks(content)
+        cleaned = self.remove_comments(content)
+
+        return self.find_variable_blocks(cleaned)

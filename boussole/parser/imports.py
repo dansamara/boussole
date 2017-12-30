@@ -3,8 +3,8 @@
 .. _Sass Reference:
     http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_import__import
 
-Imports
-=======
+Imports parser
+==============
 
 This parser is in charge to find every ``@import`` rules in given Sass content.
 
