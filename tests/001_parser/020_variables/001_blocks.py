@@ -38,43 +38,43 @@ def test_parser_flaws(source):
     (
         """$color: #ffffff;""",
         [
-            ('$color', '#ffffff'),
+            ('color', '#ffffff'),
         ],
     ),
     (
         """$empty:;""",
         [
-            ('$empty', ''),
+            ('empty', ''),
         ],
     ),
     (
         """$quote: 'cot';""",
         [
-            ('$quote', "'cot'"),
+            ('quote', "'cot'"),
         ],
     ),
     (
         """$doublequote: "cot";""",
         [
-            ('$doublequote', '"cot"'),
+            ('doublequote', '"cot"'),
         ],
     ),
     (
         """$operation: $foo / 42;""",
         [
-            ('$operation', '$foo / 42'),
+            ('operation', '$foo / 42'),
         ],
     ),
     (
         """$breakpoint: unquote("screen and #{breakpoint(medium)}");""",
         [
-            ('$breakpoint', 'unquote("screen and #{breakpoint(medium)}")'),
+            ('breakpoint', 'unquote("screen and #{breakpoint(medium)}")'),
         ],
     ),
     (
         """$list: foo bar;""",
         [
-            ('$list', 'foo bar'),
+            ('list', 'foo bar'),
         ],
     ),
     (
@@ -85,7 +85,7 @@ def test_parser_flaws(source):
             """);"""
         ),
         [
-            ('$map', (
+            ('map', (
                 """(\n"""
                 """  $bidule: "plop",\n"""
                 """    $ping: #000,\n"""
@@ -110,8 +110,8 @@ def test_valid_blocks(source, attempted):
             """$black: #000000;"""
         ),
         [
-            ('$white', '#ffffff'),
-            ('$black', '#000000'),
+            ('white', '#ffffff'),
+            ('black', '#000000'),
         ],
     ),
     (
@@ -121,8 +121,8 @@ def test_valid_blocks(source, attempted):
             """$empty:;"""
         ),
         [
-            ('$white', '#ffffff'),
-            ('$empty', ''),
+            ('white', '#ffffff'),
+            ('empty', ''),
         ],
     ),
     (
@@ -136,14 +136,14 @@ def test_valid_blocks(source, attempted):
             """$sizes: 1rem 15% 42px;\n"""
         ),
         [
-            ('$white', '#ffffff'),
-            ('$map', (
+            ('white', '#ffffff'),
+            ('map', (
                 """(\n"""
                 """  $bidule: "plop",\n"""
                 """    $ping: #000,\n"""
                 """)"""
             )),
-            ('$sizes', '1rem 15% 42px'),
+            ('sizes', '1rem 15% 42px'),
         ],
     ),
 ])
@@ -168,26 +168,26 @@ def test_advanced_settings(settings):
     result = parser.parse(content)
 
     assert [item.groups() for item in result] == [
-        ("""$emencia-compass-deprecation-warning""", """false"""),
-        ("""$font-family-opensans""", """"Open Sans", sans-serif"""),
-        ("""$white""", """#ffffff"""),
-        ("""$black""", """#000000"""),
-        ("""$body-font-family""", """$font-family-opensans"""),
-        ("""$global-font-size""", """16px"""),
-        ("""$global-weight-normal""", """400"""),
-        ("""$breakpoint-classes""", """(small medium large xlarge xxlarge)"""),
-        ("""$small-up""", """screen"""),
-        ("""$medium-up""", """unquote("screen and #{breakpoint(medium)}")"""),
-        ("""$sveetoy-breakpoints""", (
+        ("""emencia-compass-deprecation-warning""", """false"""),
+        ("""font-family-opensans""", """"Open Sans", sans-serif"""),
+        ("""white""", """#ffffff"""),
+        ("""black""", """#000000"""),
+        ("""body-font-family""", """$font-family-opensans"""),
+        ("""global-font-size""", """16px"""),
+        ("""global-weight-normal""", """400"""),
+        ("""breakpoint-classes""", """(small medium large xlarge xxlarge)"""),
+        ("""small-up""", """screen"""),
+        ("""medium-up""", """unquote("screen and #{breakpoint(medium)}")"""),
+        ("""sveetoy-breakpoints""", (
             """(\n"""
             """    small: $small-up,\n"""
             """    medium: $medium-up,\n"""
             """)"""
         )),
-        ("""$sveetoy-smalls""", (
+        ("""sveetoy-smalls""", (
             """(\n    small: 40%,\n    big: 60%,\n)"""
         )),
-        ("""$sveetoy-underline-thickness""", (
+        ("""sveetoy-underline-thickness""", (
             """(\n"""
             """    thin: (\n"""
             """        size: rem-calc(1px),\n"""
@@ -199,25 +199,25 @@ def test_advanced_settings(settings):
             """    ),\n"""
             """)"""
         )),
-        ("""$sveetoy-space-tiny""", (
+        ("""sveetoy-space-tiny""", (
             """(\n"""
             """    small: 0.5rem,\n"""
             """    medium: 0.75rem,\n"""
             """) !default"""
         )),
-        ("""$sveetoy-spaces""", (
+        ("""sveetoy-spaces""", (
             """(\n"""
             """    tiny: $sveetoy-space-tiny,\n"""
             """) !default"""
         )),
-        ("""$button-sml""", """rem-calc(14)"""),
-        ("""$button-med""", """rem-calc(16)"""),
-        ("""$sveetoy-button-modests""", (
+        ("""button-sml""", """rem-calc(14)"""),
+        ("""button-med""", """rem-calc(16)"""),
+        ("""sveetoy-button-modests""", (
             """(\n"""
             """    small: $button-sml / 2,\n"""
             """    medium: $button-med / 2,\n"""
             """)"""
         )),
-        ("""$row-larger-width""", """rem-calc(1328px)"""),
-        ("""$flex-grid-sizes""", """20 25 33.3333 50 75 100"""),
+        ("""row-larger-width""", """rem-calc(1328px)"""),
+        ("""flex-grid-sizes""", """20 25 33.3333 50 75 100"""),
     ]

@@ -20,7 +20,7 @@ class ScssVariablesParser(ScssCommentsParser):
         REGEX_VARIABLE_BLOCK: Compiled regex used to match variables blocks.
         Every match contain ``selector`` and ``properties`` groups.
     """
-    REGEX_VARIABLE_BLOCK = re.compile(r"(?P<selector>\$[\w\-]+)\s*:\s*(?P<properties>[^;]*?)\s*\;")
+    REGEX_VARIABLE_BLOCK = re.compile(r"\$(?P<selector>[\w\-]+)\s*:\s*(?P<properties>[^;]*?)\s*\;")
 
     def find_variable_blocks(self, content):
         """

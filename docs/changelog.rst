@@ -12,6 +12,7 @@ Version 1.3.0 - Unreleased
 * Moved comments parsing to its own parser ``parser.comments.ScssCommentsParser``;
 * Make ``parser.imports.ScssImportsParser`` inherit from ``parser.comments.ScssCommentsParser``;
 * Added ``parser.variables.ScssVariablesParser`` that can parse and retrieve every variables;
+* Added ``CONTRIBUTING.rst`` document;
 * Updated core API documentation;
 
 Version 1.2.2 - 2017/12/12

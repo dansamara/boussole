@@ -17,8 +17,8 @@ from boussole.parser.variables import ScssVariablesParser
             """$yep: yip;\n"""
         ),
         [
-            ("$ok", "yop"),
-            ("$yep", "yip"),
+            ("ok", "yop"),
+            ("yep", "yip"),
         ]
     )
 ])
